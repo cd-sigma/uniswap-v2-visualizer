@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h1>Uniswap V2 Pool Price Curve</h1>
+<div style="width: 100vw; height: 80vh;"><canvas id="myChart"></canvas></div>
+<script>
+    // Access the graphData passed from the server
+    let plotData = <%- plotData %>;
+
+    // Render the graph using Chart.js
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'Current price',
+                showLine: false,
+                data: plotData.currentPricePoint,
+                backgroundColor: 'blue'
+            }, {
+                label: 'Price curve',
+                data: plotData.poolCurve,
+                showLine: true,
+                spanGaps: true,
+                backgroundColor: 'rgb(255, 99, 132)'
+            }]
+        },
+        options: {}
+    });
+</script>
+</body>
+</html>
